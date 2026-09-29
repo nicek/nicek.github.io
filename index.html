@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spin Cycle: Sock Sort</title>
+  <meta name="description" content="A cozy laundry sort puzzle for Android: tap socks into matching washing machines and keep the drying rack clear.">
+  <link rel="icon" href="icon-512.png">
+  <style>
+    :root {
+      --ink: #1e2a3a;
+      --ink-soft: #5b6b80;
+      --blue: #2f6fed;
+      --blue-dark: #1f4fb8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(#eaf4ff, #b4d8ff) fixed;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 16px 40px;
+      text-align: center;
+    }
+    .icon {
+      width: 112px;
+      height: 112px;
+      border-radius: 26px;
+      box-shadow: 0 8px 24px rgba(11, 27, 58, 0.2);
+    }
+    h1 {
+      margin: 20px 0 8px;
+      color: var(--blue-dark);
+      font-size: clamp(30px, 7vw, 44px);
+      font-weight: 900;
+    }
+    .tagline {
+      margin: 0 0 28px;
+      color: var(--ink-soft);
+      font-size: 18px;
+    }
+    .banner {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(11, 27, 58, 0.18);
+    }
+    .play {
+      display: inline-block;
+      margin: 28px 0 8px;
+      padding: 14px 28px;
+      border-radius: 18px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    ul {
+      display: inline-block;
+      margin: 20px 0 0;
+      padding: 0 0 0 20px;
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    footer {
+      margin-top: 36px;
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+    footer a { color: var(--blue-dark); }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="icon" src="icon-512.png" alt="Spin Cycle app icon">
+    <h1>Spin Cycle: Sock Sort</h1>
+    <p class="tagline">Sort the socks. Fill the machines. Don't overload the rack!</p>
+    <img class="banner" src="feature-graphic.png" width="1024" height="500"
+         alt="A laundromat with four washing machines, a clothesline and a pile of colorful socks">
+    <a class="play" href="https://play.google.com/store/apps/details?id=io.github.nicek.spincycle">Get it on Google Play</a>
+    <br>
+    <ul>
+      <li>40 hand-made levels, then new levels without end</li>
+      <li>Daily Load: one new puzzle a day, the same for everyone</li>
+      <li>Colorblind friendly: every color has its own pattern</li>
+      <li>Plays offline, no account needed</li>
+    </ul>
+    <footer>
+      <a href="Sock-Sort/privacy-policy.html">Privacy policy</a>
+    </footer>
+  </main>
+</body>
+</html>
