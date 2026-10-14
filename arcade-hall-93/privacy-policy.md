@@ -4,7 +4,7 @@ Last updated: 14 October 2026
 
 This policy explains what the mobile game **Arcade Hall '93** (Polish title: *Salon Gier '93*, package
 `io.github.nicek.arcadehall`, "the game") does with information. The game is published by **nicek**, an individual
-developer ("we", "us"). Contact: **CONTACT_EMAIL**.
+developer ("we", "us"). Contact: **yt.nicek@gmail.com**.
 
 ## In short
 - The game has no accounts and no sign-in. You do not give us your name, email or any other personal details.
