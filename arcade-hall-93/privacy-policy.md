@@ -67,4 +67,4 @@ If this policy changes, the new version is published at this address with a new 
 release notes.
 
 ## Contact
-Questions or requests about privacy: **CONTACT_EMAIL**.
+Questions or requests about privacy: **yt.nicek@gmail.com**.
