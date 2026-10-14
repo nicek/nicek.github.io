@@ -1,40 +1,70 @@
-# Privacy policy (draft for Arcade Hall '93 / Salon Gier '93)
+# Privacy Policy: Arcade Hall '93
 
-> A starting point written to match what the app does. Fill the placeholders, host it at a public URL and have it
-> reviewed for your situation; it is not legal advice.
+Last updated: 14 October 2026
 
-Last updated: [DATE]. Developer: [NAME / COMPANY], contact: [EMAIL].
+This policy explains what the mobile game **Arcade Hall '93** (Polish title: *Salon Gier '93*, package
+`io.github.nicek.arcadehall`, "the game") does with information. The game is published by **nicek**, an individual
+developer ("we", "us"). Contact: **CONTACT_EMAIL**.
 
-## What the app is
-A single-player game for adults. There are no accounts and no sign-in. The game works offline; your progress is saved
-only on your device. The developer does not run a server for the game and does not receive your save.
+## In short
+- The game has no accounts and no sign-in. You do not give us your name, email or any other personal details.
+- Your progress is saved only on your device. We run no server for the game and never receive your save.
+- The game is free and shows ads. Two Google services (AdMob for ads, Firebase for statistics and crash reports) process some
+  technical data, as described below. We do not sell data.
+- The game is for people aged **13 and over** and is not directed to children under 13.
 
 ## What the game stores on your device
-Your progress (money, machines, records, settings of the day) in the app's private storage. Uninstalling the app removes it.
+Your progress (money, machines, records, options such as volume) is stored in the game's private storage on your device. We do
+not receive it. Uninstalling the game deletes it.
 
-## Data collected by third-party services
-The app shows ads and measures how it is used. Two Google services do this; they may process the following data under
-their own privacy policies (https://policies.google.com/privacy):
+## Data processed by third-party services
+These services act on their own responsibility, under their own policies (https://policies.google.com/privacy):
 
-- **Google AdMob** (advertising): advertising identifier, IP address and the approximate location derived from it, device
-  and app information, and how you interact with ads. Used to show ads, limit their frequency, measure them and prevent fraud.
-  Where you agree (EEA, UK and some other regions), ads can be personalised.
-- **Firebase Analytics and Crashlytics** (usage and stability): anonymous app-instance identifiers, game events (for example
-  "day finished", "minigame played", "rewarded ad completed"), device model, operating system version, country and crash
-  reports. Used to improve the game and fix crashes.
+**Google AdMob (advertising).** To show and measure ads and prevent fraud, AdMob may process: your advertising ID, IP address
+and the approximate location derived from it, device and app information (model, operating system, language), and how you
+interact with ads. Where you agree (in the European Economic Area, the United Kingdom and some other regions) ads may be
+personalised; otherwise only non-personalised ads are requested. Rewarded ads are always optional: you choose to watch one and
+the game asks you first.
 
-The app does not use your precise location, contacts, photos, microphone, camera or health data, and it does not sell data.
+**Firebase Analytics and Crashlytics (statistics and stability).** To understand how the game is used and to fix crashes, Firebase
+may process: an anonymous app-instance identifier, game events (for example "day finished", "minigame played" with the score and
+duration, "rewarded ad completed"), device model, operating system version, country, and crash reports. We do not add your name,
+email or any other identifier of ours to this data.
 
-## Your choices
-- In regions where the law requires it, the app asks for your consent when it starts (Google User Messaging Platform).
-  Until you have answered, no ads are requested and no analytics or crash data are collected.
-- You can change your choice later with the **Privacy** button on the title screen, and you can reset or limit the
-  advertising identifier in your device's Settings (Google > Ads).
-- Because the game has no accounts, the developer cannot look up or delete data "about you" in the game. For data held by
-  Google, use Google's own tools (https://myaccount.google.com).
+The game does not use your precise location, contacts, photos, microphone, camera, files or health data. It requests only the
+permissions it needs for internet access, network state, vibration and the advertising ID.
+
+## Why we process it
+To run the game for free with ads, to measure and improve it, and to fix crashes. In the EEA, the UK and other regions where
+the law requires it, we rely on your **consent** for ads personalisation, advertising identifiers and analytics. Until you have
+answered the consent message, the game requests no ads and collects no analytics or crash data.
+
+## Your choices and rights
+- Answer or change the consent message at any time with the **Privacy** button on the title screen (it is shown where the law
+  requires a way to change your choice).
+- Reset or limit the advertising ID in your device's settings (Settings > Google > Ads), and opt out of ads personalisation there.
+- Because the game has no accounts, we cannot identify you in the data and so cannot look up or delete data "about you". For
+  data Google holds, use Google's tools (https://myaccount.google.com, https://adssettings.google.com) and contact Google.
+- Depending on where you live (for example the EEA, the UK or California) you have rights such as access, correction, deletion,
+  restriction, objection, withdrawing consent, and complaining to a data protection authority. Write to us and we will help as
+  far as the data we can link to you allows.
+
+## International transfers and retention
+Google may process data in countries outside your own, under the safeguards described in its policies. How long Google keeps
+advertising and analytics data follows its own settings and policies; we keep no copy of it of our own.
 
 ## Children
-The game is made for adults (18+) and is not directed to children. If you believe a child used it, contact us.
+The game is for people aged **13 and over**. It is not directed to children under 13 and we do not knowingly collect data from
+them. If you are a parent or guardian and believe a child under 13 uses the game, contact us and uninstall it; there is
+nothing in the game for us to delete. Some countries set a higher age for consent to data processing; in those, a younger
+player should use the game only with a parent's permission.
 
-## Changes and contact
-Changes to this policy are published at this address with a new date. Questions: [EMAIL].
+## Security
+Everything the game stores stays on your device. Data sent to Google services travels over encrypted connections.
+
+## Changes
+If this policy changes, the new version is published at this address with a new date. Material changes are mentioned in the game's
+release notes.
+
+## Contact
+Questions or requests about privacy: **CONTACT_EMAIL**.
