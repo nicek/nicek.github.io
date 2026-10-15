@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Five by Five: Daily Dice – a daily dice puzzle for Android</title>
+  <meta name="description" content="Roll two dice, write the sum into a 5×5 grid and make poker hands in every row, column and diagonal. The same 25 rolls for everyone, every day. Free on Google Play.">
+  <link rel="canonical" href="https://nicek.github.io/five-by-five/">
+  <link rel="alternate" hreflang="en" href="https://nicek.github.io/five-by-five/?lang=en">
+  <link rel="alternate" hreflang="pl" href="https://nicek.github.io/five-by-five/?lang=pl">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <meta name="theme-color" content="#F6F1E7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1B2233" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Five by Five: Daily Dice">
+  <meta property="og:description" content="A daily dice puzzle: fill a 5×5 grid and make poker hands. The same 25 rolls for everyone, every day.">
+  <meta property="og:url" content="https://nicek.github.io/five-by-five/">
+  <meta property="og:image" content="https://nicek.github.io/five-by-five/img/feature-graphic-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    @font-face {
+      font-family: "Nunito";
+      src: url("fonts/nunito-latin.woff") format("woff");
+      font-weight: 200 1000;
+      font-display: swap;
+    }
+    :root {
+      --paper: #F6F1E7;
+      --surface: #FBF8F1;
+      --ink: #1F2A44;
+      --muted: #5C667C;
+      --line: #D8D0C0;
+      --shadow: rgba(31, 42, 68, 0.16);
+      --coral: #EF7A5A;
+      --yellow: #F2B544;
+      --blue: #7FB3E6;
+      --teal: #4FB0A5;
+      --purple: #9B7FD1;
+      --gold: #D4A017;
+      --marker: rgba(242, 181, 68, 0.75);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #1B2233;
+        --surface: #232C40;
+        --ink: #EDE6D6;
+        --muted: #A8B0C3;
+        --line: #3A4560;
+        --shadow: rgba(0, 0, 0, 0.45);
+        --marker: rgba(239, 122, 90, 0.6);
+        color-scheme: dark;
+      }
+    }
+    html[data-lang="en"] .pl, html[data-lang="pl"] .en { display: none !important; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Nunito", ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    /* Top bar */
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 18px; padding-bottom: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 19px; text-decoration: none; }
+    .brand img { width: 36px; height: 36px; border-radius: 9px; box-shadow: 0 2px 8px var(--shadow); }
+    .langs { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+    .langs button {
+      font: inherit; font-weight: 800; font-size: 14px; color: var(--muted);
+      border: 0; background: transparent; border-radius: 999px; padding: 6px 12px; min-height: 36px; cursor: pointer;
+    }
+    .langs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+    /* Hero */
+    .hero { display: grid; gap: 40px; align-items: center; padding-top: 28px; padding-bottom: 56px; }
+    @media (min-width: 860px) { .hero { grid-template-columns: 1.15fr 0.85fr; padding-top: 44px; } }
+    .eyebrow {
+      display: inline-block; font-weight: 800; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--coral); margin: 0 0 12px;
+    }
+    h1 { font-size: clamp(38px, 7vw, 64px); line-height: 1.05; font-weight: 1000; margin: 0 0 20px; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(28px, 4.5vw, 40px); line-height: 1.12; font-weight: 1000; margin: 0 0 12px; }
+    mark {
+      color: inherit; background: linear-gradient(transparent 52%, var(--marker) 52%, var(--marker) 92%, transparent 92%);
+      padding: 0 0.08em; border-radius: 4px;
+    }
+    .lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+    .stores { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .store {
+      display: inline-flex; align-items: center; gap: 12px; min-height: 58px; padding: 10px 22px 10px 18px;
+      border-radius: 16px; text-decoration: none; line-height: 1.15;
+    }
+    .store small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.8; }
+    .store strong { display: block; font-size: 19px; font-weight: 900; }
+    .store svg { flex: none; }
+    .store.play { background: var(--ink); color: var(--paper); box-shadow: 0 6px 18px var(--shadow); transition: transform 0.15s ease; }
+    .store.play:hover { transform: translateY(-2px); }
+    .store.play:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .store.soon { border: 2px dashed var(--line); color: var(--muted); }
+    .facts { margin: 22px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-weight: 700; font-size: 15px; }
+    .facts li::before { content: "✓"; color: var(--teal); font-weight: 900; margin-right: 6px; }
+
+    .phone-wrap { position: relative; justify-self: center; width: min(78vw, 330px); }
+    .phone {
+      display: block; width: 100%; height: auto; border-radius: 34px; border: 9px solid var(--ink);
+      background: var(--surface); box-shadow: 0 24px 50px var(--shadow); transform: rotate(2deg);
+    }
+    .die { position: absolute; width: 74px; height: 74px; filter: drop-shadow(0 8px 12px var(--shadow)); }
+    .die.one { left: -38px; bottom: 16%; transform: rotate(-14deg); }
+    .die.two { right: -30px; top: 9%; transform: rotate(11deg); width: 62px; height: 62px; }
+
+    /* Sections */
+    section.block { padding: 56px 0; border-top: 1px solid var(--line); }
+    .sub { color: var(--muted); margin: 0 0 28px; max-width: 40em; }
+    .steps { display: grid; gap: 16px; }
+    @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .card { background: var(--surface); border-radius: 20px; padding: 22px; box-shadow: 0 1px 0 var(--line); }
+    .card h3 { margin: 8px 0 6px; font-size: 21px; font-weight: 900; }
+    .card p { margin: 0; color: var(--muted); }
+    .num {
+      display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
+      background: var(--coral); color: #fff; font-weight: 1000;
+    }
+
+    .hands { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin: 0; padding: 0; list-style: none; }
+    .hand { display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: 16px; padding: 10px 14px; }
+    .badge { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; color: #1F2A44; }
+    .hand .name { flex: 1; font-weight: 800; }
+    .hand b { font-size: 20px; font-weight: 1000; font-variant-numeric: tabular-nums; }
+    .x2 { margin-top: 16px; color: var(--muted); font-weight: 700; }
+
+    .shots {
+      display: grid; grid-auto-flow: column; grid-auto-columns: min(62vw, 250px); gap: 16px;
+      overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 18px; margin: 0 -4px;
+    }
+    .shots img {
+      width: 100%; height: auto; border-radius: 18px; scroll-snap-align: start;
+      box-shadow: 0 10px 24px var(--shadow); background: var(--surface);
+    }
+
+    .features { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+    .features .card h3 { font-size: 19px; margin-top: 0; }
+
+    .cta { text-align: center; padding-top: 64px; padding-bottom: 72px; border-top: 1px solid var(--line); }
+    .cta .stores { justify-content: center; margin-top: 24px; }
+
+    footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 15px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
+    footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    footer a { font-weight: 700; }
+    @media (prefers-reduced-motion: reduce) { .store.play { transition: none; } .phone { transform: none; } }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.4-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" fill="currentColor"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="h-pair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="currentColor"/></symbol>
+    <symbol id="h-two" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3" fill="currentColor"/><circle cx="16" cy="12" r="3" fill="currentColor"/></symbol>
+    <symbol id="h-three" viewBox="0 0 24 24"><path d="M12 6l6.5 11h-13z" fill="currentColor"/></symbol>
+    <symbol id="h-house" viewBox="0 0 24 24"><path d="M12 5l7 6v8h-5v-5h-4v5H5v-8z" fill="currentColor"/></symbol>
+    <symbol id="h-four" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="1.5" fill="currentColor"/></symbol>
+    <symbol id="h-arrow" viewBox="0 0 24 24"><path d="M4 12h13m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="h-arrow-star" viewBox="0 0 24 24"><path d="M3 14h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 3l1.1 2.3 2.4.3-1.8 1.6.5 2.4-2.2-1.2-2.2 1.2.5-2.4-1.8-1.6 2.4-.3z" fill="currentColor"/></symbol>
+    <symbol id="h-star" viewBox="0 0 24 24"><path d="M12 4l2.4 5 5.4.6-4 3.7 1.1 5.3L12 16l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z" fill="currentColor"/></symbol>
+    <symbol id="die" viewBox="0 0 100 100"><rect x="3" y="3" width="94" height="94" rx="20" fill="#FFFBF2" stroke="#DCD5C5" stroke-width="4"/></symbol>
+  </svg>
+
+  <header class="wrap top">
+    <a class="brand" href="./">
+      <img src="img/icon-180.png" alt="" width="36" height="36">
+      <span class="en">Five by Five</span><span class="pl">Pięć na Pięć</span>
+    </a>
+    <div class="langs" role="group" aria-label="Language / Język">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="pl" aria-pressed="false">PL</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <p class="eyebrow"><span class="en">A daily dice puzzle for Android</span><span class="pl">Codzienna łamigłówka z kośćmi na Androida</span></p>
+        <h1>
+          <span class="en">Roll two dice. <mark>Place the sum.</mark></span>
+          <span class="pl">Rzuć dwiema kośćmi. <mark>Wpisz sumę.</mark></span>
+        </h1>
+        <p class="lead">
+          <span class="en">Fill a 5×5 grid with dice sums and make poker hands in every row, column and diagonal. Everyone gets the same 25 rolls each day – how close to perfect can you get?</span>
+          <span class="pl">Wypełnij siatkę 5×5 sumami oczek i układaj pokerowe układy w każdym rzędzie, kolumnie i na przekątnych. Każdego dnia wszyscy dostają te same 25 rzutów – jak blisko ideału dasz radę?</span>
+        </p>
+        <div class="stores">
+          <a class="store play" href="https://play.google.com/store/apps/details?id=com.nicek.fivebyfive&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">
+            <svg width="26" height="26" aria-hidden="true"><use href="#i-play"/></svg>
+            <span><small class="en">Get it on</small><small class="pl">Pobierz z</small><strong>Google Play</strong></span>
+          </a>
+          <span class="store soon">
+            <svg width="24" height="24" aria-hidden="true"><use href="#i-clock"/></svg>
+            <span><small class="en">Coming soon</small><small class="pl">Już wkrótce</small><strong>App Store</strong></span>
+          </span>
+        </div>
+        <ul class="facts">
+          <li><span class="en">Free</span><span class="pl">Za darmo</span></li>
+          <li><span class="en">No account</span><span class="pl">Bez konta</span></li>
+          <li><span class="en">Works offline</span><span class="pl">Działa offline</span></li>
+        </ul>
+      </div>
+      <div class="phone-wrap">
+        <img class="phone en" src="img/en-hero.webp" width="480" height="1011" alt="Five by Five game screen: two dice showing 8 above a 5×5 grid with highlighted lines">
+        <img class="phone pl" src="img/pl-hero.webp" width="480" height="1011" alt="Ekran gry Pięć na Pięć: dwie kości z sumą 8 nad siatką 5×5 z zaznaczonymi liniami" loading="lazy">
+        <svg class="die one" viewBox="0 0 100 100" aria-hidden="true"><use href="#die"/><g fill="#1F2A44"><circle cx="28" cy="28" r="9"/><circle cx="72" cy="28" r="9"/><circle cx="50" cy="50" r="9"/><circle cx="28" cy="72" r="9"/><circle cx="72" cy="72" r="9"/></g></svg>
+        <svg class="die two" viewBox="0 0 100 100" aria-hidden="true"><use href="#die"/><g fill="#1F2A44"><circle cx="30" cy="30" r="9"/><circle cx="50" cy="50" r="9"/><circle cx="70" cy="70" r="9"/></g></svg>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <h2><span class="en">How to play</span><span class="pl">Jak grać</span></h2>
+        <p class="sub"><span class="en">You learn it in a minute – the game shows you how with a short interactive tutorial.</span><span class="pl">Nauczysz się w minutę – gra pokaże ci zasady w krótkim interaktywnym samouczku.</span></p>
+        <div class="steps">
+          <div class="card">
+            <span class="num">1</span>
+            <h3><span class="en">Roll</span><span class="pl">Rzut</span></h3>
+            <p><span class="en">Two dice are rolled every turn. A game has 25 turns.</span><span class="pl">W każdej turze rzucasz dwiema kośćmi. Gra ma 25 tur.</span></p>
+          </div>
+          <div class="card">
+            <span class="num">2</span>
+            <h3><span class="en">Place</span><span class="pl">Wpis</span></h3>
+            <p><span class="en">Write the sum (2–12) into any empty cell. Once written, it stays put.</span><span class="pl">Wpisz sumę (2–12) w dowolne puste pole. Wpisanej liczby nie da się przenieść.</span></p>
+          </div>
+          <div class="card">
+            <span class="num">3</span>
+            <h3><span class="en">Score</span><span class="pl">Punkty</span></h3>
+            <p><span class="en">When the grid is full, every row, column and diagonal scores like a poker hand.</span><span class="pl">Gdy siatka jest pełna, każdy rząd, kolumna i przekątna punktuje jak układ w pokerze.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <h2><span class="en">Hands and points</span><span class="pl">Układy i punkty</span></h2>
+        <ul class="hands">
+          <li class="hand"><span class="badge" style="background:var(--blue)"><svg width="22" height="22" aria-hidden="true"><use href="#h-pair"/></svg></span><span class="name"><span class="en">Pair</span><span class="pl">Para</span></span><b>1</b></li>
+          <li class="hand"><span class="badge" style="background:var(--teal)"><svg width="22" height="22" aria-hidden="true"><use href="#h-two"/></svg></span><span class="name"><span class="en">Two pair</span><span class="pl">Dwie pary</span></span><b>3</b></li>
+          <li class="hand"><span class="badge" style="background:var(--teal)"><svg width="22" height="22" aria-hidden="true"><use href="#h-three"/></svg></span><span class="name"><span class="en">Three of a kind</span><span class="pl">Trójka</span></span><b>3</b></li>
+          <li class="hand"><span class="badge" style="background:var(--purple)"><svg width="22" height="22" aria-hidden="true"><use href="#h-four"/></svg></span><span class="name"><span class="en">Four of a kind</span><span class="pl">Kareta</span></span><b>6</b></li>
+          <li class="hand"><span class="badge" style="background:var(--yellow)"><svg width="22" height="22" aria-hidden="true"><use href="#h-house"/></svg></span><span class="name"><span class="en">Full house</span><span class="pl">Full</span></span><b>8</b></li>
+          <li class="hand"><span class="badge" style="background:var(--coral)"><svg width="22" height="22" aria-hidden="true"><use href="#h-arrow"/></svg></span><span class="name"><span class="en">Straight</span><span class="pl">Strit</span></span><b>8</b></li>
+          <li class="hand"><span class="badge" style="background:var(--gold)"><svg width="22" height="22" aria-hidden="true"><use href="#h-star"/></svg></span><span class="name"><span class="en">Five of a kind</span><span class="pl">Pięć jednakowych</span></span><b>10</b></li>
+          <li class="hand"><span class="badge" style="background:var(--coral)"><svg width="22" height="22" aria-hidden="true"><use href="#h-arrow-star"/></svg></span><span class="name"><span class="en">Straight without a 7</span><span class="pl">Strit bez 7</span></span><b>12</b></li>
+        </ul>
+        <p class="x2"><span class="en">Diagonals count double. Your score is compared with the best possible layout of the same rolls.</span><span class="pl">Przekątne liczą się podwójnie. Twój wynik porównujemy z najlepszym możliwym ułożeniem tych samych rzutów.</span></p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <h2><span class="en">Take a look</span><span class="pl">Zobacz grę</span></h2>
+        <div class="shots en" tabindex="0" aria-label="Screenshots">
+          <img src="img/en-01-game.webp" width="540" height="960" loading="lazy" alt="Roll two dice and place the sum">
+          <img src="img/en-02-result.webp" width="540" height="960" loading="lazy" alt="Result screen with the percentage of the best layout">
+          <img src="img/en-03-home.webp" width="540" height="960" loading="lazy" alt="Home screen with today's daily puzzle">
+          <img src="img/en-04-tutorial.webp" width="540" height="960" loading="lazy" alt="Interactive tutorial">
+          <img src="img/en-05-stats.webp" width="540" height="960" loading="lazy" alt="Statistics and hand album">
+          <img src="img/en-06-dark.webp" width="540" height="960" loading="lazy" alt="Dark theme">
+          <img src="img/en-07-archive.webp" width="540" height="960" loading="lazy" alt="Archive of past days">
+        </div>
+        <div class="shots pl" tabindex="0" aria-label="Zrzuty ekranu">
+          <img src="img/pl-01-game.webp" width="540" height="960" loading="lazy" alt="Rzuć dwiema kośćmi i wpisz sumę">
+          <img src="img/pl-02-result.webp" width="540" height="960" loading="lazy" alt="Ekran wyniku z procentem najlepszego układu">
+          <img src="img/pl-03-home.webp" width="540" height="960" loading="lazy" alt="Ekran startowy z grą dnia">
+          <img src="img/pl-04-tutorial.webp" width="540" height="960" loading="lazy" alt="Interaktywny samouczek">
+          <img src="img/pl-05-stats.webp" width="540" height="960" loading="lazy" alt="Statystyki i album układów">
+          <img src="img/pl-06-dark.webp" width="540" height="960" loading="lazy" alt="Ciemny motyw">
+          <img src="img/pl-07-archive.webp" width="540" height="960" loading="lazy" alt="Archiwum poprzednich dni">
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <h2><span class="en">Everything in the game</span><span class="pl">Co jest w grze</span></h2>
+        <div class="features">
+          <div class="card"><h3><span class="en">Daily puzzle</span><span class="pl">Gra dnia</span></h3><p><span class="en">The same 25 rolls for everyone, once a day. Keep your streak going.</span><span class="pl">Te same 25 rzutów dla wszystkich, raz dziennie. Nie przerwij serii.</span></p></div>
+          <div class="card"><h3><span class="en">Percent of perfect</span><span class="pl">Procent ideału</span></h3><p><span class="en">After each game, see how close you came to the best layout – and the layout itself.</span><span class="pl">Po każdej grze widzisz, jak blisko było do najlepszego ułożenia – i jak ono wygląda.</span></p></div>
+          <div class="card"><h3><span class="en">Free play</span><span class="pl">Gra wolna</span></h3><p><span class="en">Unlimited random games whenever you like, with your own record.</span><span class="pl">Dowolnie wiele losowych gier, kiedy chcesz, z własnym rekordem.</span></p></div>
+          <div class="card"><h3><span class="en">Archive</span><span class="pl">Archiwum</span></h3><p><span class="en">Missed a day? Every past puzzle is waiting for you.</span><span class="pl">Ominął cię dzień? Wszystkie poprzednie łamigłówki czekają.</span></p></div>
+          <div class="card"><h3><span class="en">Stats and hand album</span><span class="pl">Statystyki i album</span></h3><p><span class="en">Streaks, averages and every hand you have ever closed.</span><span class="pl">Serie, średnie i każdy układ, jaki udało ci się zamknąć.</span></p></div>
+          <div class="card"><h3><span class="en">Share without spoilers</span><span class="pl">Udostępnij bez spoilerów</span></h3><p><span class="en">Show friends your result as a grid of coloured squares.</span><span class="pl">Pochwal się wynikiem jako siatką kolorowych kwadratów.</span></p></div>
+          <div class="card"><h3><span class="en">Day and night</span><span class="pl">Dzień i noc</span></h3><p><span class="en">A warm paper look with a dark theme.</span><span class="pl">Ciepły papierowy styl i ciemny motyw.</span></p></div>
+          <div class="card"><h3><span class="en">Offline, no account</span><span class="pl">Offline, bez konta</span></h3><p><span class="en">Play anywhere, no sign-up. English and Polish.</span><span class="pl">Graj wszędzie, bez rejestracji. Po polsku i po angielsku.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap cta">
+      <h2><span class="en">Today's 25 rolls are waiting</span><span class="pl">Dzisiejsze 25 rzutów już czeka</span></h2>
+      <div class="stores">
+        <a class="store play" href="https://play.google.com/store/apps/details?id=com.nicek.fivebyfive&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">
+          <svg width="26" height="26" aria-hidden="true"><use href="#i-play"/></svg>
+          <span><small class="en">Get it on</small><small class="pl">Pobierz z</small><strong>Google Play</strong></span>
+        </a>
+        <span class="store soon">
+          <svg width="24" height="24" aria-hidden="true"><use href="#i-clock"/></svg>
+          <span><small class="en">Coming soon</small><small class="pl">Już wkrótce</small><strong>App Store</strong></span>
+        </span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Five by Five</span>
+      <nav>
+        <a href="privacy-policy"><span class="en">Privacy policy</span><span class="pl">Polityka prywatności</span></a>
+        <a href="https://play.google.com/store/apps/details?id=com.nicek.fivebyfive">Google Play</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var supported = ["en", "pl"];
+      var titles = {
+        en: "Five by Five: Daily Dice – a daily dice puzzle for Android",
+        pl: "Pięć na Pięć: Kości dnia – codzienna łamigłówka z kośćmi na Androida"
+      };
+      function initial() {
+        var fromUrl = new URLSearchParams(location.search).get("lang");
+        if (supported.indexOf(fromUrl) >= 0) return fromUrl;
+        try {
+          var saved = localStorage.getItem("fivebyfive-lang");
+          if (supported.indexOf(saved) >= 0) return saved;
+        } catch (e) {}
+        var browser = ((navigator.languages && navigator.languages[0]) || navigator.language || "en").toLowerCase();
+        return browser.indexOf("pl") === 0 ? "pl" : "en";
+      }
+      function apply(lang) {
+        var root = document.documentElement;
+        root.lang = lang;
+        root.setAttribute("data-lang", lang);
+        document.title = titles[lang];
+        var buttons = document.querySelectorAll("[data-set-lang]");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].setAttribute("aria-pressed", String(buttons[i].getAttribute("data-set-lang") === lang));
+        }
+      }
+      var buttons = document.querySelectorAll("[data-set-lang]");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+          var lang = this.getAttribute("data-set-lang");
+          apply(lang);
+          try { localStorage.setItem("fivebyfive-lang", lang); } catch (e) {}
+        });
+      }
+      apply(initial());
+    })();
+  </script>
+</body>
+</html>
