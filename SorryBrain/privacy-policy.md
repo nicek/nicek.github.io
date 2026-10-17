@@ -1,8 +1,8 @@
 # Privacy Policy: Sorry, Brain
 
-**Last updated:** [DATE]
-**Developer:** [DEVELOPER NAME AS SHOWN ON GOOGLE PLAY]
-**Contact:** [CONTACT EMAIL]
+**Last updated:** 18/10/2026
+**Developer:** Nicek_
+**Contact:** yt.nicek@gmail.com
 
 Sorry, Brain ("the app") is a puzzle game for Android. This policy explains what data the app
 handles and who handles it.
